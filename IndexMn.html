@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leadership Marathon - A 6-day transformative journey through leadership development">
+    <meta name="author" content="Skills Bank">
+    <title>Leadership Marathon - Readiness Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #0a0e27;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0a0e27;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1E2761 0%, #0a0e27 100%);
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(253, 183, 20, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(253, 183, 20, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .stat-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FDB714;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 500;
+        }
+
+        .readiness-panel {
+            background: #141932;
+            padding: 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .readiness-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .progress-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 48px;
+        }
+
+        .progress-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 100px;
+            height: 28px;
+            overflow: hidden;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FDB714 0%, #00A651 100%);
+            border-radius: 100px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 0 20px rgba(253, 183, 20, 0.4);
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .readiness-display {
+            text-align: center;
+        }
+
+        .readiness-number {
+            font-size: 72px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FDB714 0%, #00A651 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .readiness-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .stages-section {
+            padding: 60px 40px;
+        }
+
+        .stage-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 32px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-left: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stage-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateX(4px);
+        }
+
+        .stage-card.active {
+            border-left-color: #FDB714;
+            background: rgba(253, 183, 20, 0.05);
+        }
+
+        .stage-card.completed {
+            border-left-color: #00A651;
+            background: rgba(0, 166, 81, 0.05);
+        }
+
+        .stage-header {
+            padding: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .stage-meta {
+            flex: 1;
+        }
+
+        .stage-day {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .stage-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .stage-type {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(30, 39, 97, 0.5);
+            border: 1px solid rgba(30, 39, 97, 0.8);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .stage-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .status-locked {
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-active {
+            background: rgba(253, 183, 20, 0.15);
+            color: #FDB714;
+            border: 1px solid rgba(253, 183, 20, 0.3);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .status-completed {
+            background: rgba(0, 166, 81, 0.15);
+            color: #00A651;
+            border: 1px solid rgba(0, 166, 81, 0.3);
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .stage-body {
+            padding: 32px;
+        }
+
+        .skills-block {
+            margin-bottom: 32px;
+        }
+
+        .block-header {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 12px;
+        }
+
+        .skill-item {
+            padding: 14px 18px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 3px solid rgba(30, 39, 97, 0.8);
+            border-radius: 8px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+            border-left-color: #FDB714;
+        }
+
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        .task-item {
+            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            gap: 16px;
+            transition: all 0.3s ease;
+            align-items: flex-start;
+        }
+
+        .task-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(253, 183, 20, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .task-item.completed {
+            background: rgba(0, 166, 81, 0.1);
+            border-color: rgba(0, 166, 81, 0.4);
+        }
+
+        .task-check {
+            width: 32px;
+            height: 32px;
+            border: 2.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .task-item.completed .task-check {
+            background: #00A651;
+            border-color: #00A651;
+        }
+
+        .task-check svg {
+            width: 20px;
+            height: 20px;
+            stroke: #ffffff;
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .task-item.completed .task-check svg {
+            opacity: 1;
+        }
+
+        .task-details {
+            flex: 1;
+        }
+
+        .task-name {
+            font-size: 15px;
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .task-rewards {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .reward-base {
+            color: #FDB714;
+        }
+
+        .reward-bonus {
+            color: #00A651;
+        }
+
+        .badge-earned {
+            margin-top: 32px;
+            padding: 32px;
+            background: rgba(0, 166, 81, 0.08);
+            border: 1px solid rgba(0, 166, 81, 0.2);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .badge-display {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 24px;
+            background: linear-gradient(135deg, rgba(0, 166, 81, 0.2) 0%, rgba(0, 166, 81, 0.05) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            border: 3px solid rgba(0, 166, 81, 0.4);
+            animation: badgeReveal 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes badgeReveal {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .badge-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #00A651;
+        }
+
+        .victory-banner {
+            background: linear-gradient(135deg, #00A651 0%, #00D66B 100%);
+            padding: 80px 40px;
+            text-align: center;
+            margin: 40px;
+            border-radius: 20px;
+            display: none;
+            animation: victorySlide 0.8s ease;
+        }
+
+        .victory-banner.show {
+            display: block;
+        }
+
+        @keyframes victorySlide {
+            from {
+                opacity: 0;
+                transform: translateY(-40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .victory-banner h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .victory-banner p {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            display: flex;
+            gap: 12px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 16px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-reset {
+            background: rgba(220, 53, 69, 0.9);
+            color: white;
+            box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-reset:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(220, 53, 69, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 24px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .stats-dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .readiness-panel,
+            .stages-section {
+                padding: 40px 24px;
+            }
+
+            .progress-card {
+                padding: 32px 24px;
+            }
+
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stage-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .controls {
+                bottom: 20px;
+                right: 20px;
+                left: 20px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Leadership Marathon</h1>
+                <p class="hero-subtitle">A 6-day transformative journey · Leadership through the marathon experience</p>
+                
+                <div class="stats-dashboard">
+                    <div class="stat-box">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-value" id="xpValue">0</div>
+                        <div class="stat-label">Total XP</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">✓</div>
+                        <div class="stat-value" id="tasksValue">0/24</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value" id="badgesValue">0/6</div>
+                        <div class="stat-label">Badges</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-value" id="bonusValue">0</div>
+                        <div class="stat-label">Bonus XP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="readiness-panel">
+            <div class="readiness-wrapper">
+                <h2 class="section-title">Marathon Readiness Index</h2>
+                <div class="progress-card">
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="readiness-display">
+                        <div class="readiness-number" id="readinessPercent">0%</div>
+                        <div class="readiness-label">Ready for the marathon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="victory-banner" id="victoryBanner">
+            <h2>🏆 Marathon Leader Certified</h2>
+            <p>You've completed all stages and earned every badge. You're now fully prepared to lead your team through any challenge with confidence and excellence.</p>
+        </div>
+
+        <div class="stages-section" id="stagesContainer"></div>
+    </div>
+
+    <div class="controls">
+        <button class="btn btn-reset" onclick="resetAll()">Reset Progress</button>
+    </div>
+
+    <script>
+        const program = {
+            stages: [
+                {
+                    day: 1,
+                    title: "Preparation and Registration",
+                    type: "Hybrid",
+                    marathonSkills: ["Goal Setting", "Discipline", "Knowing Your Running Style"],
+                    leadershipSkills: [
+                        "Start with Strategy",
+                        "Knowing your leadership style (Blinded Model)",
+                        "Setting clear direction (OKR)",
+                        "Building leadership discipline (4DX)"
+                    ],
+                    badgeIcon: "🎯",
+                    badgeName: "Strategic Starter",
+                    tasks: [
+                        { name: "Complete leadership style assessment (Blinded Model)", xp: 25, bonus: 5 },
+                        { name: "Define and set clear strategic direction (OKR)", xp: 20, bonus: 5 },
+                        { name: "Build your leadership discipline framework (4DX)", xp: 30, bonus: 10 },
+                        { name: "Register on AIH system and access personalized plan", xp: 25, bonus: 5 }
+                    ]
+                },
+                {
+                    day: 2,
+                    title: "Start Line",
+                    type: "Outdoor",
+                    marathonSkills: ["Confidence", "Focus", "Role Clarity"],
+                    leadershipSkills: [
+                        "Clear leadership roles",
+                        "Decision making under pressure",
+                        "Leading with confidence"
+                    ],
+                    badgeIcon: "🚀",
+                    badgeName: "Confident Leader",
+                    tasks: [
+                        { name: "Define clear leadership roles for your team", xp: 25, bonus: 5 },
+                        { name: "Practice decision making under pressure scenarios", xp: 30, bonus: 10 },
+                        { name: "Complete the Starting Line Simulation challenge", xp: 25, bonus: 5 },
+                        { name: "Master the Blind Focus Activity", xp: 20, bonus: 5 }
+                    ]
+                },
+                {
+                    day: 3,
+                    title: "The Pace",
+                    type: "Indoor",
+                    marathonSkills: ["Sustainable Performance", "Patience", "Prioritization"],
+                    leadershipSkills: [
+                        "Maintaining team performance (Skill/Will Matrix)",
+                        "Prioritizing business needs (Impact/Effort)",
+                        "Managing workload effectively (Must/Should/Drop Matrix)"
+                    ],
+                    badgeIcon: "⚡",
+                    badgeName: "Performance Master",
+                    tasks: [
+                        { name: "Apply Skill/Will Matrix to maintain team performance", xp: 30, bonus: 10 },
+                        { name: "Prioritize business needs using Impact/Effort analysis", xp: 25, bonus: 5 },
+                        { name: "Manage workload with Must/Should/Drop Matrix", xp: 25, bonus: 5 },
+                        { name: "Complete Marathon Team Energy Detector activity", xp: 20, bonus: 5 }
+                    ]
+                },
+                {
+                    day: 4,
+                    title: "The Wall",
+                    type: "Outdoor",
+                    marathonSkills: ["Resilience", "Risk Judgment", "Perseverance"],
+                    leadershipSkills: [
+                        "Leading through challenges",
+                        "Managing uncertainty and risks",
+                        "Staying strong under pressure"
+                    ],
+                    badgeIcon: "🛡️",
+                    badgeName: "Resilient Champion",
+                    tasks: [
+                        { name: "Navigate the Obstacle Course challenge", xp: 30, bonus: 10 },
+                        { name: "Make critical decisions in Stress Decision Game", xp: 30, bonus: 10 },
+                        { name: "Adapt to the Last Minute Twist Challenge", xp: 25, bonus: 5 },
+                        { name: "Demonstrate resilience under pressure", xp: 25, bonus: 5 }
+                    ]
+                },
+                {
+                    day: 5,
+                    title: "Last Mile",
+                    type: "Indoor",
+                    marathonSkills: ["Determination", "Collaboration", "Execution Focus"],
+                    leadershipSkills: [
+                        "Driving results together (RACI Matrix)",
+                        "Cross-team collaboration (Team Canvas)",
+                        "Delivering high performance (High Performance Habits)",
+                        "AI as a Banking business partner"
+                    ],
+                    badgeIcon: "🤝",
+                    badgeName: "Collaborative Driver",
+                    tasks: [
+                        { name: "Drive results using RACI Matrix framework", xp: 30, bonus: 10 },
+                        { name: "Facilitate cross-team collaboration with Team Canvas", xp: 25, bonus: 5 },
+                        { name: "Implement High Performance Habits in workflow", xp: 25, bonus: 5 },
+                        { name: "Complete the Marathon Leader Challenge", xp: 30, bonus: 10 }
+                    ]
+                },
+                {
+                    day: 6,
+                    title: "Final Sprint & Recovery",
+                    type: "Hybrid",
+                    marathonSkills: ["Strong Start", "Winner Mindset", "Recovery", "Continuous Improvement"],
+                    leadershipSkills: [
+                        "Coaching and developing others",
+                        "Learning from experience (Lessons Learned Journal)",
+                        "Building sustainable leadership habits"
+                    ],
+                    badgeIcon: "🏆",
+                    badgeName: "Marathon Leader",
+                    tasks: [
+                        { name: "Complete the Real Marathon 1K with Cairo Runners", xp: 40, bonus: 15 },
+                        { name: "Conduct individual coaching session", xp: 30, bonus: 10 },
+                        { name: "Document lessons learned in your journal", xp: 20, bonus: 5 },
+                        { name: "Create sustainable leadership habits plan", xp: 30, bonus: 10 }
+                    ]
+                }
+            ]
+        };
+
+        let state = {
+            completed: new Set(),
+            badges: new Set(),
+            totalXP: 0,
+            bonusXP: 0,
+            currentDay: 1
+        };
+
+        function init() {
+            load();
+            render();
+            update();
+        }
+
+        function render() {
+            const container = document.getElementById('stagesContainer');
+            container.innerHTML = '';
+
+            program.stages.forEach(stage => {
+                const doneCount = stage.tasks.filter((_, i) => 
+                    state.completed.has(`d${stage.day}t${i}`)
+                ).length;
+                const isDone = doneCount === stage.tasks.length;
+                const isActive = stage.day === state.currentDay;
+                const isLocked = stage.day > state.currentDay;
+
+                const card = document.createElement('div');
+                card.className = `stage-card ${isDone ? 'completed' : ''} ${isActive ? 'active' : ''}`;
+
+                let statusHTML = '';
+                if (isLocked) {
+                    statusHTML = '<div class="stage-status status-locked">🔒 Locked</div>';
+                } else if (isActive && !isDone) {
+                    statusHTML = '<div class="stage-status status-active">▶ Active Now</div>';
+                } else if (isDone) {
+                    statusHTML = '<div class="stage-status status-completed">✓ Completed</div>';
+                }
+
+                const hasBadge = state.badges.has(`d${stage.day}`);
+
+                card.innerHTML = `
+                    <div class="stage-header">
+                        <div class="stage-meta">
+                            <div class="stage-day">Day ${stage.day}</div>
+                            <div class="stage-title">${stage.title}</div>
+                            <div style="margin-top: 12px;">
+                                <span class="stage-type">${stage.type}</span>
+                            </div>
+                        </div>
+                        ${statusHTML}
+                    </div>
+                    <div class="stage-body">
+                        ${stage.marathonSkills && stage.marathonSkills.length > 0 ? `
+                            <div class="skills-block">
+                                <div class="block-header">Marathon Skills</div>
+                                <div class="skills-list">
+                                    ${stage.marathonSkills.map(s => 
+                                        `<div class="skill-item">${s}</div>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${stage.leadershipSkills && stage.leadershipSkills.length > 0 ? `
+                            <div class="skills-block">
+                                <div class="block-header">Leadership Application</div>
+                                <div class="skills-list">
+                                    ${stage.leadershipSkills.map(s => 
+                                        `<div class="skill-item">${s}</div>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <div class="skills-block">
+                            <div class="block-header">Activities & Tasks</div>
+                            <div class="tasks-grid">
+                                ${stage.tasks.map((task, i) => {
+                                    const tid = `d${stage.day}t${i}`;
+                                    const done = state.completed.has(tid);
+                                    return `
+                                        <div class="task-item ${done ? 'completed' : ''}" 
+                                             onclick="${isLocked ? '' : `toggle('${tid}', ${task.xp}, ${task.bonus}, ${stage.day})`}"
+                                             style="${isLocked ? 'opacity: 0.4; cursor: not-allowed;' : ''}">
+                                            <div class="task-check">
+                                                <svg viewBox="0 0 24 24" fill="none">
+                                                    <path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                            <div class="task-details">
+                                                <div class="task-name">${task.name}</div>
+                                                <div class="task-rewards">
+                                                    <span class="reward-base">${task.xp} XP</span>
+                                                    <span>+</span>
+                                                    <span class="reward-bonus">${task.bonus} Bonus</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        ${hasBadge ? `
+                            <div class="badge-earned">
+                                <div class="badge-display">${stage.badgeIcon}</div>
+                                <div class="badge-title">${stage.badgeName}</div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function toggle(tid, xp, bonus, day) {
+            if (day !== state.currentDay) return;
+
+            if (state.completed.has(tid)) {
+                state.completed.delete(tid);
+                state.totalXP -= xp;
+                state.bonusXP -= bonus;
+            } else {
+                state.completed.add(tid);
+                state.totalXP += xp;
+                state.bonusXP += bonus;
+            }
+
+            check(day);
+            save();
+            render();
+            update();
+        }
+
+        function check(day) {
+            const stage = program.stages.find(s => s.day === day);
+            const done = stage.tasks.filter((_, i) => 
+                state.completed.has(`d${day}t${i}`)
+            ).length;
+
+            if (done === stage.tasks.length) {
+                state.badges.add(`d${day}`);
+                if (day < 6) state.currentDay = day + 1;
+            } else {
+                state.badges.delete(`d${day}`);
+            }
+
+            const banner = document.getElementById('victoryBanner');
+            if (state.badges.size === 6) {
+                banner.classList.add('show');
+            } else {
+                banner.classList.remove('show');
+            }
+        }
+
+        function update() {
+            document.getElementById('xpValue').textContent = state.totalXP;
+            document.getElementById('tasksValue').textContent = `${state.completed.size}/24`;
+            document.getElementById('badgesValue').textContent = `${state.badges.size}/6`;
+            document.getElementById('bonusValue').textContent = state.bonusXP;
+
+            const taskW = 0.4, xpW = 0.4, bonusW = 0.2;
+            const taskP = (state.completed.size / 24) * 100;
+            const xpP = (state.totalXP / 630) * 100;
+            const bonusP = (state.bonusXP / 180) * 100;
+
+            const readiness = Math.round(taskP * taskW + xpP * xpW + bonusP * bonusW);
+
+            document.getElementById('progressBar').style.width = readiness + '%';
+            document.getElementById('readinessPercent').textContent = readiness + '%';
+        }
+
+        function save() {
+            localStorage.setItem('marathon_state', JSON.stringify({
+                completed: Array.from(state.completed),
+                badges: Array.from(state.badges),
+                totalXP: state.totalXP,
+                bonusXP: state.bonusXP,
+                currentDay: state.currentDay
+            }));
+        }
+
+        function load() {
+            const saved = localStorage.getItem('marathon_state');
+            if (saved) {
+                const data = JSON.parse(saved);
+                state.completed = new Set(data.completed);
+                state.badges = new Set(data.badges);
+                state.totalXP = data.totalXP;
+                state.bonusXP = data.bonusXP;
+                state.currentDay = data.currentDay;
+            }
+        }
+
+        function resetAll() {
+            if (confirm('Reset all progress? This action cannot be undone.')) {
+                localStorage.removeItem('marathon_state');
+                state = {
+                    completed: new Set(),
+                    badges: new Set(),
+                    totalXP: 0,
+                    bonusXP: 0,
+                    currentDay: 1
+                };
+                render();
+                update();
+            }
+        }
+
+        init();
+    </script>
+</body>
+</html>
